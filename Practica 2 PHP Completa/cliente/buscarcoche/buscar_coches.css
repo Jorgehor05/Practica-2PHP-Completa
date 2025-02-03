@@ -1,0 +1,121 @@
+/* Estilo general */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+}
+
+/* Encabezado principal */
+h1 {
+    font-size: 2rem;
+    color: #0077c2;
+    margin-bottom: 20px;
+}
+
+/* Estilo de la tabla */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #0077c2;
+    color: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e6f7ff;
+    transition: background 0.3s;
+}
+
+/* Estilo para las imágenes de los coches */
+.foto-coche {
+    max-width: 120px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Mensaje cuando no hay resultados */
+p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 20px;
+}
+
+/* Formulario de búsqueda */
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form label {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+    color: #555;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+    box-sizing: border-box;
+}
+
+form input:focus, form select:focus {
+    outline: none;
+    border-color: #0077c2;
+    box-shadow: 0 0 5px rgba(0, 119, 194, 0.3);
+}
+
+/* Botón de búsqueda */
+form input[type="submit"] {
+    background-color: #0077c2;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 12px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #005da7;
+    transform: scale(1.05);
+}
