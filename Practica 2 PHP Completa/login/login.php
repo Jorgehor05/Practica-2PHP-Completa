@@ -1,73 +1,65 @@
 <?php
-// Database connection setup
-$servername = "localhost";
-$username = "root";
-$password = "rootroot";
-$dbname = "coches";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 session_start();
 
 if (isset($_POST['login'])) {
     $dni = $_POST['dni'];
     $password = $_POST['password'];
 
-    $sql = "SELECT u.id_usuario, u.password, t.tipo FROM usuarios u JOIN tipos_usuario t ON u.id_usuario = t.id_usuario WHERE dni = '$dni'";
-    $result = $conn->query($sql);
+    $conn = mysqli_connect("localhost", "root", "rootroot", "coches");
+    if (!$conn) {
+        die("Conexión fallida: " . mysqli_connect_error());
+    }
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        if (password_verify($password, $row['password'])) {
-            $_SESSION['id_usuario'] = $row['id_usuario'];
-            $_SESSION['tipo'] = $row['tipo'];
-            header("Location: dashboard.php");
+    $sql = "SELECT * FROM usuarios WHERE dni = '$dni'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $user = mysqli_fetch_assoc($result);
+
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['usuario'] = $user['id'];
+            $_SESSION['rol'] = $user['tipo']; // Guardar el rol (comprador/vendedor)
+
+            // Redirigir a la página guardada en la sesión o al inicio
+            $redirect_to = isset($_SESSION['redirect_to']) ? $_SESSION['redirect_to'] : '../../inicio/inicio.php';
+            unset($_SESSION['redirect_to']); // Limpiar la sesión de redirección
+            header("Location: $redirect_to");
+            exit();
         } else {
-            echo "Invalid password.";
+            echo "Contraseña incorrecta.";
         }
     } else {
-        echo "User not found.";
+        echo "No se encontró un usuario con ese DNI.";
     }
+
+    mysqli_close($conn);
 }
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP+SQL</title>
-    <script>
-        function redirigirPagina(selectElement) {
-            const url = selectElement.value; // Obtiene el valor seleccionado
-            if (url) {
-                window.location.href = url; // Redirige a la URL
-            }
-        }
-    </script>
-	<link rel="stylesheet" href="login1.css">
-	
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-
-<!-- Menú de navegación -->
-    <nav class="menu">
-        <ul>
-			<li> <h2>Concesionario Hornos <h2></li>	
-            <li><a href="../login/login.php"> Login </a></li>
-            <li><a href="../registro/Registro.php"> Registrarse </a></li>
-        </ul>
-    </nav>
+<nav>
+    <ul>
+        <li><a href="../../inicio/inicio.php">Inicio</a></li>
+        <li><a href="../../cliente/buscarcoche/buscar1.php">Buscar Coches</a></li>
+        <li><a href="../../login/login.php">Iniciar Sesión</a></li>
+    </ul>
+</nav>
 
 <form method="POST" action="">
-	<h1> Iniciar sesion </h1>
+    <h1>Iniciar sesión</h1>
     <input type="text" name="dni" placeholder="DNI" required>
     <input type="password" name="password" placeholder="Password" required>
     <button type="submit" name="login">Login</button>
-	<br>
-	¿Has olvidado tu contraseña? <a href="cambiar contraseña.php"> Cambiar contraseña </a>
+    <br>
+    ¿Has olvidado tu contraseña? <a href="../login/cambiar contraseña.php">Cambiar contraseña</a>
 </form>
+</body>
+</html>

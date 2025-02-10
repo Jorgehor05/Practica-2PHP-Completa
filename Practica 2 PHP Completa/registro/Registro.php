@@ -25,11 +25,15 @@ if (isset($_POST['register'])) {
         $user_id = $conn->insert_id;
         $sql_tipo = "INSERT INTO tipos_usuario (id_usuario, tipo) VALUES ($user_id, '$tipo')";
         $conn->query($sql_tipo);
-        echo "El registro es exitoso!";
+
+        // Redirección automática a la página de inicio de sesión
+        header("Location: ../login/login.php");
+        exit();
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
+
 ?>
 
 <!doctype html>
@@ -46,7 +50,7 @@ if (isset($_POST['register'])) {
             }
         }
     </script>
-	<link rel="stylesheet" href="registro.css">
+	<link rel="stylesheet" href="registro1.css">
 	
 </head>
 <body>

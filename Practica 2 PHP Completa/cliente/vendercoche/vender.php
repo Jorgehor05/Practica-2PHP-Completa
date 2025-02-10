@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Coches</title>
+    <title>Vender Coches</title>
     <link rel="stylesheet" href="vender.css">
 </head>
 <body>
@@ -12,16 +12,16 @@
  </header>
     <nav>
         <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="coches.html">Coches</a></li>
-            <li><a href="alquiler.html">Alquilar</a></li>
-            <li><a href="login.html">Iniciar Sesión</a></li>
+            <li><a href="../../inicio/inicio.php">Inicio</a></li>
+            <li><a href="../../cliente/buscarcoche/buscar1.php">Coches</a></li>
+            <li><a href="../../errorsesion/errorsesion.php">Alquilar</a></li>
+            <li><a href="../../login/login.php">Iniciar Sesión</a></li>
         </ul>
     </nav>
 	<br>
     <div class="container">
         <h1>Vender Coche</h1>
-        <form action="vender2.php" method="post">
+        <form action="vender2.php" method="post" enctype="multipart/form-data">
             <label for="marca">Marca:</label>
             <input type="text" id="marca" name="marca" placeholder="Añade la marca...">
             
@@ -70,7 +70,16 @@ En Hornos, el concesionario de coches de ocasión más grande de Madrid, dispone
 	
 	
 <?PHP
+session_start();
 
+// Verificar si el usuario está logueado y tiene el rol de vendedor
+if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'Vendedor') {
+    // Guardar la página actual para redirigir después del login
+    $_SESSION['redirect_to'] = $_SERVER['REQUEST_URI'];
+    header("Location: ../../login/login.php");
+    exit();
+}
+	
 // Conectar con el servidor de base de datos
       $conexion = mysqli_connect ("localhost", "root", "rootroot")
          or die ("No se puede conectar con el servidor");

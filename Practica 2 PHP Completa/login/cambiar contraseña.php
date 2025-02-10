@@ -47,7 +47,7 @@ if (isset($_POST['update_password'])) {
             }
         }
     </script>
-	<link rel="stylesheet" href="cambiarcontraseña.css">
+	<link rel="stylesheet" href="cambiarcontra.css">
 	
 </head>
 <body>
@@ -65,5 +65,5 @@ if (isset($_POST['update_password'])) {
 	<h1> Cambiar contraseña </h1>
     <input type="text" name="dni" placeholder="DNI" required>
     <input type="password" name="password" placeholder="Nueva contraseña" required>
-    <button type="submit" name="login">Aceptar</button>
+    <button type="submit" name="update_password">Aceptar</button>
 </form>

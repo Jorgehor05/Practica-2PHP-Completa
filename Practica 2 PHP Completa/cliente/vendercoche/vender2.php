@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+
+if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'Vendedor') {
+    header("Location: ../../errorsesion/errorsesion2.php");
+    exit();
+}
+
+
 // Configuración de la base de datos
 $servername = "localhost";
 $username = "root";
@@ -12,14 +21,14 @@ if (!$conn) {
 }
 
 // Obtener los datos del formulario
-$marca = isset($_POST['marca']) ? mysqli_real_escape_string($conn, $_POST['marca']) : '';
-$modelo = isset($_POST['modelo']) ? mysqli_real_escape_string($conn, $_POST['modelo']) : '';
-$color = isset($_POST['color']) ? mysqli_real_escape_string($conn, $_POST['color']) : '';
-$precio = isset($_POST['precio']) && is_numeric($_POST['precio']) ? $_POST['precio'] : 0;
-$alquilado = 0; // Por defecto, el coche no está alquilado
+$marca = $_POST['marca'];
+$modelo = $_POST['modelo'];
+$color = $_POST['color'];
+$precio = $_POST['precio'];
+$alquilado = 0; 
 
 // Ruta donde se guardarán las imágenes
-$ruta_base = "C:/AppServ/www/ejercicios/Practica 2 PHP Completa/Practica 2 PHP Completa/cliente/img/";
+$ruta_base = $_SERVER['DOCUMENT_ROOT'] . "/ejercicios/Practica 2 PHP Completa/Practica 2 PHP Completa/cliente/img/";
 
 // Procesar la imagen
 $foto_nombre = basename($_FILES['foto']['name']);
@@ -28,6 +37,8 @@ $foto_destino = $ruta_base . $foto_nombre;
 
 // Mover la imagen a la carpeta de destino
 if (move_uploaded_file($foto_tmp, $foto_destino)) {
+	// Establecer permisos de lectura y escritura para todos (777)
+    chmod($foto_destino, 0777);
     // Guardar solo la ruta relativa en la base de datos
     $foto_db = "img/" . $foto_nombre;
 } else {

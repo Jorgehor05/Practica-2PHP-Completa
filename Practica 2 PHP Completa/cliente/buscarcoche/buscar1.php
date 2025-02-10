@@ -12,10 +12,10 @@
  </header>
     <nav>
         <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="coches.html">Coches</a></li>
-            <li><a href="alquiler.html">Alquilar</a></li>
-            <li><a href="login.html">Iniciar Sesión</a></li>
+            <li><a href="../../inicio/inicio.php">Inicio</a></li>
+            <li><a href="../../cliente/buscarcoche/buscar1.php">Coches</a></li>
+            <li><a href="../../errorsesion/errorsesion.php">Alquilar</a></li>
+            <li><a href="../../login/login.php">Iniciar Sesión</a></li>
         </ul>
     </nav>
 	<br>

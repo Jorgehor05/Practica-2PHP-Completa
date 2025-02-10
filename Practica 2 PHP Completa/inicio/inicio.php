@@ -13,9 +13,9 @@
     <nav>
         <ul>
             <li><a href="inicio.php">Inicio</a></li>
-            <li><a href="../comprar/buscarcoche/buscar1.php">Coches</a></li>
-            <li><a href="alquiler.html">Vender</a></li>
-            <li><a href="login.html">Iniciar Sesión</a></li>
+            <li><a href="../cliente/buscarcoche/buscar1.php">Coches</a></li>
+            <li><a href="../errorsesion/errorsesion2.php"> Vender </a></li>
+            <li><a href="../login/login.php">Iniciar Sesión</a></li>
         </ul>
     </nav>
 	
@@ -27,8 +27,8 @@
 	
 	<section class="cta-section">
 	<div class="botones1">
-			<a href="../comprar/buscarcoche/buscar1.php" class="btn-vender"> Comprar coche </a>
-            <a href="#" class="btn-comprar"> Vender coche</a>
+			<a href="../cliente/buscarcoche/buscar1.php" class="btn-vender"> Comprar coche </a>
+            <a href="../errorsesion/errorsesion2.php" class="btn-comprar"> Vender coche</a>
      </div>
 	</section>
 	

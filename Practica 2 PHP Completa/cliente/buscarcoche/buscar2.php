@@ -1,3 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Coches</title>
+    <link rel="stylesheet" href="buscar1.css">
+</head>
+<body>
+<header>
+        <h1>Concesionario Hornos</h1>
+ </header>
+    <nav>
+        <ul>
+            <li><a href="../../inicio/inicio.php">Inicio</a></li>
+            <li><a href="../../cliente/buscarcoche/buscar1.php">Coches</a></li>
+            <li><a href="../../errorsesion/errorsesion.php">Alquilar</a></li>
+            <li><a href="../../login/login.php">Iniciar Sesión</a></li>
+        </ul>
+    </nav>
+	<br>
+	
 <?php
 // Configuracion base de datos
 		$servername = "localhost";$username = "root";$password = "rootroot";$dbname = "coches";
@@ -47,13 +69,14 @@ $result = mysqli_query($conn, $sql);
 if ($result && mysqli_num_rows($result) > 0) {
     echo "<h2>Resultados de la Búsqueda</h2>";
     echo "<table border='1' cellpadding='10'>";
-    echo "<tr><th>Marca</th><th>Modelo</th><th>Color</th><th>Precio</th><th>Foto</th></tr>";
+    echo "<tr><th>Marca</th><th>Modelo</th><th>Color</th><th>Precio</th><th>Alquilado</th><th>Foto</th></tr>";
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>
                 <td>{$row['marca']}</td>
                 <td>{$row['modelo']}</td>
                 <td>{$row['color']}</td>
                 <td>{$row['precio']} €</td>
+				<td>{$row['alquilado']}</td>
                 <td><img src='{$row['foto']}' alt='Foto del coche' class='foto-coche'></td>
               </tr>";
     }
@@ -65,3 +88,11 @@ if ($result && mysqli_num_rows($result) > 0) {
 echo '</body>';
 echo '</html>';
 ?>
+<br>
+<br>
+<br>
+<section class="cta-section">
+	<div class="botones1">
+            <a href="../../errorsesion/errorsesion.php" class="btn-comprar"> Comprar coche</a>
+     </div>
+	</section>
